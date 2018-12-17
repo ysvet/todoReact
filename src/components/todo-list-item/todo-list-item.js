@@ -5,6 +5,8 @@ import './todo-list-item.css';
 
 export default class TodoListItem extends Component {
 
+///!!!!!!!!!*****WE don't need the state any more, it's just an axample of it:
+
 //the STATE can be initialised with constructor:
   // constructor() {
   //   super();
@@ -14,10 +16,10 @@ export default class TodoListItem extends Component {
   // };
 
 // or it can be initialised with CLASS FIELDS (PROPOSAL)
-  state = {
-    done: false,
-    important: false
-  };
+  // state = {
+  //   done: false,
+  //   important: false
+  // };
 
 /// Can be done like this:
  // constructor () {
@@ -29,25 +31,12 @@ export default class TodoListItem extends Component {
  // };
 
  //.. or with CLASS FIELDS (PROPOSAL)
- onLabelClick = () => {
-      this.setState(({done}) => {  // or without destructuring this.setState((state)
-        return {
-          done: !done // or without destructuring done: !state.done
-        };
-      });
- };
-
- onMarkImportant = () => {
-   this.setState(({important}) => {
-     return {
-       important: !important
-     };
-   });
- };
 
   render() {
-   const { label, onDeleted } = this.props;
-   const {done, important} = this.state;
+   const { label, onDeleted,
+           onToggleImportant,
+           onToggleDone,
+           important, done } = this.props;
 
    let classNames = 'todo-list-item';
    if (done) {
@@ -62,12 +51,12 @@ if (important) {
       <span className= {classNames}>
         <span
           className="todo-list-item-label"
-          onClick= {this.onLabelClick}>
+          onClick= {onToggleDone}>
           {label}
         </span>
 
         <button type="button"
-                className="btn btn-outline-success btn-sm float-right" onClick = {this.onMarkImportant}>
+                className="btn btn-outline-success btn-sm float-right" onClick = {onToggleImportant}>
           <i className="fa fa-exclamation" />
         </button>
 
